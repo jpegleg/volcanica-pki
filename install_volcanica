@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+ls volcanica-pki || cargo build --release || exit 1
+which volcanica-pki || cp target/release/volcanica-pki /usr/local/bin/volcanica-pki
+cp proto/* /usr/local/bin/
+chmod +x /usr/local/bin/*volca* && cargo clean
