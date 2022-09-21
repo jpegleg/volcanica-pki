@@ -50,4 +50,4 @@ volcanica_sign $(cat /etc/machine-id) myuser "$clientmachineid".pub
 
 ## additional setup
 
-Ensure the servers have the appropriate `/etc/ssh/sshd_config` and that the client side has the appropriate `~/.ssh/known_hosts` and `/etc/ssh/known_hosts` to trust the ca public key.
+Ensure the servers have the appropriate `/etc/ssh/sshd_config` and that the client side has the appropriate `~/.ssh/known_hosts` and/or `/etc/ssh/known_hosts` to trust the ca public key.
