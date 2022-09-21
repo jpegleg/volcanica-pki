@@ -2,6 +2,8 @@
 memcap=$(volcanica-pki | xxd -p | tr -d '\n')
 echo $memcap | xxd -r -p | head -n1 > "$1".pub
 echo $memcap | xxd -r -p | grep -v ed25519 | gpg --cipher=aes256 --always-trust --batch --armor -r $2 --yes -e > "$1".asc || exit 1
+echo $memcap | xxd -r -p | grep -v ed25519 > $1
+chmod 600 $1
 ssh-keygen -s $1 -h -I $1 $1.pub
 :>"$1" && rm "$1" 
 ssh-keygen -L -f "$1"-cert.pub
