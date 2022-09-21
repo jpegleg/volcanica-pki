@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+cp $1 ca || exit 1
+chmod 600 ca
+ssh-keygen -s ca -I $2 -h -n $2 -V +52w $3
+:>ca && rm -f ca
