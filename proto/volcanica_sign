@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 gpg -d "$1".asc > ca || exit 1
 chmod 600 ca
-ssh-keygen -s ca -I $1 -h -n $2 -V +1d $3
+ssh-keygen -s ca -I $2 -h -n $2 -V +1d $3
 :>ca && rm -f ca
