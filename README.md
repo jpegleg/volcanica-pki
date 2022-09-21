@@ -10,7 +10,7 @@ Some ed25519 ssh key and certificate generation tools.
 
 ## installation (for both server and client)
 
-Cargo is required to compile volcanica-pki. The binary can also be copied without compiling but the install script does compile with cargo by default.
+Cargo is required to compile volcanica-pki. The binary can also be copied without compiling but the install script does compile with cargo by default unless the binary is in the `$pwd` as `volcanica-pki`, in which case the `$(pwd)/volcanica-pki` will be used for the install to `/usr/local/bin/`.
 
 ```
 bash install_volcanica
