@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+memcap=$(volcanica-pki | xxd -p | tr -d '\n')
+echo $memcap | xxd -r -p | head -n1 > "$1".pub
+echo $memcap | xxd -r -p | grep -v ed25519 | gpg --cipher=aes256 --always-trust --batch --armor -r $2 --yes -e > "$1".asc
+b2sum "$1".pub
+sha256sum "$1".pub
+sha1sum "$1".pub
