@@ -12,7 +12,7 @@ Some ed25519 ssh key and certificate generation tools.
 
 ## optional gpg and lava mode
 
-The more secure but less automated way uses gpg (gnupg2) to wrap private keys in AES256 via asymmetric private keys. This requires the keyring containing the gpg secret key and password for it to decrypt. Alternative to that, there is the wrappers that start with `lava_` which do not protect the ed25519 private keys with gpg. For fully automated solutions, the `lava_` versions will be used, or otherwise modified with "automatable" key access.
+The more secure but less automated way uses gpg (gnupg2) to wrap private keys in symmetric AES256 via asymmetric pgp identity keys. This requires the keyring containing the gpg secret key and password for it to decrypt. Alternative to that, there is the wrappers that start with `lava_` which do not protect the ed25519 private keys with gpg. For fully automated solutions, the `lava_` versions will be used, or otherwise modified with "automatable" key access.
 
 ## installation (for both server and client)
 
