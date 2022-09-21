@@ -8,3 +8,36 @@ Some ed25519 ssh key and certificate generation tools.
 
 - 1 day ssh certificates
 
+## installation (for both server and client)
+
+Cargo is required to compile volcanica-pki. The binary can also be copied without compiling but the install script does compile with cargo by default.
+
+```
+bash install_volcanica
+```
+
+## usage
+
+On the signing server, generate a new user access CA:
+
+```
+new_volcano_ca $(cat /etc/machine-id) mypgpgthing@mypgpgkey.thingsetc
+```
+
+The second argument can be anything desired for the key ID. In the example we use the `machine-id` value.
+
+On a client side, generating a new key pair:
+
+```
+new_volcano_ca $(cat /etc/machine-id) someuserpgpkey@placeandstuff
+```
+
+The public key can be sent to the PKI server to then sign (will be prompted for gpg password to the private key):
+
+```
+volcanica_sign $(cat /etc/machine-id) myservers1.net,myserver2.net,myserver3.net "$clientmachineid".pub
+```
+
+## additional setup
+
+Ensure the servers have the appropriate `/etc/ssh/sshd_config` and that the client side has the appropriate `~/.ssh/known_hosts` and `/etc/ssh/known_hosts` to trust the ca public key.
