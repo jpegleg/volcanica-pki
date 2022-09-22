@@ -40,7 +40,7 @@ Sign the host_key used by each server (send the public host key over to the PKI 
 volcanica_sign_host $(cat /etc/machine-id) myservers1.net,myserver2.net,myserver3.net ssh_host_ed25519.pub
 ```
 
-The host_key can be generated just like a client, but has to be configured to be used in the `/etc/ssh/sshd_config`.
+The host certificate is signed with ssh-keygen using the decrypted key file, but has to be configured to be used in the `/etc/ssh/sshd_config`.
 
 On a client side, generating a new key pair:
 
