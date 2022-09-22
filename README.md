@@ -8,7 +8,9 @@ Some ed25519 ssh key and certificate generation tools.
 
 - gnupg asymmetric identity and AES256 for storage
 
-- 1 day ssh certificates
+- 1 day ssh user certificates default
+
+- 1 year ssh host key certificate default
 
 ## optional gpg and lava mode
 
