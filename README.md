@@ -84,6 +84,19 @@ Another example with a different naming approach:
 volcanica_sign_user admin_group_root root "$clientmachineid".pub
 ```
 
+## ssh with a certificate
+
+The user side can specify both certificate and key on the command line like so:
+```
+ssh -i ~/.ssh/summerSalt-cert.pub -i ~/.ssh/summerSalt root@myserver
+```
+
+Alternatively, the certificate and key can be specified in a user config, either globally on the user system in /etc/ssh/ssh_config or individually in ~/.ssh/ssh_config like so:
+
+```
+IdentityFile ~/.ssh/summerSalt
+```
+
 ## additional setup
 
 Ensure the servers have the appropriate `/etc/ssh/sshd_config` (see templates/server__sshd_config) and that the client side has the appropriate `~/.ssh/known_hosts` and/or `/etc/ssh/known_hosts` to trust the ca public key (see templates/client__ssh_known_hosts).
