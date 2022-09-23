@@ -91,11 +91,6 @@ The user side can specify both certificate and key on the command line like so:
 ssh -i ~/.ssh/summerSalt-cert.pub -i ~/.ssh/summerSalt root@myserver
 ```
 
-Alternatively, the certificate and key can be specified in a user config, either globally on the user system in /etc/ssh/ssh_config or individually in ~/.ssh/ssh_config like so:
-
-```
-IdentityFile ~/.ssh/summerSalt
-```
 
 ## additional setup
 
