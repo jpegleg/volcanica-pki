@@ -56,10 +56,11 @@ new_volcano_client $(cat /etc/machine-id) someuserpgpkey@placeandstuff
 ```
 
 We encrypt the private key with a pgp key and write to a file name "$1".asc. The private key doesn't have to
-touch the disk with the default method. In `lava_` mode, the plaintext private key is written to disk.
+touch the disk with the default method of key generation. The signing operation currently does expose the private key to the disk briefly. 
+In `lava_` mode, the plaintext private key is written to disk during generation, and the renewal scripts use the name exactly rather than a "$1".asc version.
 
 
-The public key can be sent to the PKI server to then sign (will be prompted for gpg password to the private key):
+The public key can be sent to the PKI server (TBD on transmission approach there) to then sign (will be prompted for gpg password to the private key unless using lava mode):
 
 ```
 volcanica_sign_user $(cat /etc/machine-id) myuser "$clientmachineid".pub
