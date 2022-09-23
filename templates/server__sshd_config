@@ -1,5 +1,5 @@
 # prevent authorized_keys usage to force certificate use
-AuthorizedKeysFile /dev/null
+AuthorizedKeysFile /dev/null                                    #Disable authorized_keys usage
 AuthenticationMethods publickey                                 #Only public key authentication allowed
 PubkeyAuthentication yes                                        #Allow public key authentication
 
