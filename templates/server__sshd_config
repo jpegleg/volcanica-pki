@@ -1,9 +1,4 @@
-# prevent authorized_keys usage to force certificate use
-AuthorizedKeysFile /dev/null                                    #Disable authorized_keys usage
-AuthenticationMethods publickey                                 #Only public key authentication allowed
-PubkeyAuthentication yes                                        #Allow public key authentication
-
-# other hardening
+# Enforced ssh server config file for volcanica-pki
 Protocol 2                                                      #Protocol 1 is fundamentally broken
 StrictModes yes                                                 #Protects from misconfiguration
 Port 22                                                         #Listening port. Normal 22
@@ -45,3 +40,7 @@ TrustedUserCAKeys /etc/ssh/ssh_user_key.pub
 HostKey /etc/ssh/ssh_host_ed25519_key
 HostCertificate /etc/ssh/ssh_host_ed25519_key-cert.pub
 HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-ed25519
+# prevent authorized_keys usage to force certificate use
+AuthorizedKeysFile /dev/null                                    #Disable authorized_keys usage
+AuthenticationMethods publickey                                 #Only public key authentication allowed
+PubkeyAuthentication yes                                        #Allow public key authentication
