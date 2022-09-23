@@ -7,8 +7,6 @@ PubkeyAuthentication yes                                        #Allow public ke
 Protocol 2                                                      #Protocol 1 is fundamentally broken
 StrictModes yes                                                 #Protects from misconfiguration
 Port 22                                                         #Listening port. Normal 22
-AuthenticationMethods publickey                                 #Only public key authentication allowed
-PubkeyAuthentication yes                                        #Allow public key authentication
 KexAlgorithms curve25519-sha256                                 #Specifies the available KEX (Key Exchange) algorithms
 Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com    #Specifies the ciphers allowed
 MACs hmac-sha2-512-etm@openssh.com                              #Specifies the available MAC alg.
