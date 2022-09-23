@@ -35,6 +35,7 @@ fn get_sk(pk: &[u8], keypair: Keypair) -> String {
   buffer.write_bytes(pk);
 
   let mut sk = ByteBuffer::new();
+  // your choice of hex here
   sk.write_u32(0x0ba4ef88);
   sk.write_u32(0x0ba4ef88);
   sk.write_bytes(pk);
@@ -61,7 +62,7 @@ fn main() -> Result<(), Box<dyn Error>> {
   buffer.write_u32(KEYTYPE.len() as u32);
   buffer.write_bytes(KEYTYPE);
   buffer.write_u32(PUBLIC_KEY_LENGTH as u32);
-
+  // we loop 0 times normally unless a vanity pattern is passed in
   loop {
     let keypair = Keypair::generate(&mut csprng);
     buffer.write_bytes(&keypair.public.to_bytes());
