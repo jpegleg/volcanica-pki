@@ -1,3 +1,9 @@
+# prevent authorized_keys usage to force certificate use
+AuthorizedKeysFile /dev/null
+AuthenticationMethods publickey                                 #Only public key authentication allowed
+PubkeyAuthentication yes                                        #Allow public key authentication
+
+# other hardening
 Protocol 2                                                      #Protocol 1 is fundamentally broken
 StrictModes yes                                                 #Protects from misconfiguration
 Port 22                                                         #Listening port. Normal 22
