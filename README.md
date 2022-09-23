@@ -2,6 +2,8 @@
 
 Some ed25519 ssh key and certificate generation tools.
 
+- hardened sshd_config to enforce certificate use
+
 - rust dalek ed25519 and os rng key generation
 
 - vanity public key feature available but not used by default
