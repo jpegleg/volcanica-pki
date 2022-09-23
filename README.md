@@ -34,6 +34,12 @@ On the signing server, generate a new user access CA:
 new_volcano_ca $(cat /etc/machine-id) mypgpgthing@mypgpgkey.thingsetc
 ```
 
+Optionally generate a separate ssh server CA. Them being different has tactical beneifts.
+
+```
+new_volcano_ca userseca root@lansegmentssomething.local
+```
+
 The first argument can be anything desired for the key ID. In the example we use the `machine-id` value.
 The second argument is the gpg key id or key email.
 
@@ -65,7 +71,7 @@ In `lava_` mode, the plaintext private key is written to disk during generation,
 The public key can be sent to the PKI server (TBD on transmission approach there) to then sign (will be prompted for gpg password to the private key unless using lava mode):
 
 ```
-volcanica_sign_user $(cat /etc/machine-id) myuser "$clientmachineid".pub
+volcanica_sign_user userseca myuser "$clientmachineid".pub
 ```
 
 The input names are intentionally flexible in this system. Whatever is used as the first argument will be treated as "$1".asc,
@@ -80,7 +86,7 @@ volcanica_sign_user admin_group_root root "$clientmachineid".pub
 
 ## additional setup
 
-Ensure the servers have the appropriate `/etc/ssh/sshd_config` and that the client side has the appropriate `~/.ssh/known_hosts` and/or `/etc/ssh/known_hosts` to trust the ca public key. 
+Ensure the servers have the appropriate `/etc/ssh/sshd_config` (see templates/server__sshd_config) and that the client side has the appropriate `~/.ssh/known_hosts` and/or `/etc/ssh/known_hosts` to trust the ca public key (see templates/client__ssh_known_hosts).
 
 #### common patterns
 
@@ -93,3 +99,9 @@ Ensure the servers have the appropriate `/etc/ssh/sshd_config` and that the clie
 ## coming next
 
 Ansible and more support automation will be aded.
+
+## warning 🐉 
+
+If volcanica-pki is deployed, ssh keys will not work for access unless they have a valid certificate as per the sshd_config hardening.
+
+Ensure that either console access is available or that you have access to the CAs used in the deployment to sign public keys for access!
