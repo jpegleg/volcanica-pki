@@ -104,9 +104,13 @@ Ensure the servers have the appropriate `/etc/ssh/sshd_config` (see templates/se
 - have the user for automation less secure but renewed and rekeyed automatically each hour or so, renewal done only from restricted source and key use reduced to the approved automation jobs executions only
 
 
-## coming next
+## ansible 
 
-Ansible and more support automation will be aded.
+For lava mode server renewals, there is an ansible playbook titled lava-book.yml that pushes out the sshd_config, user CA key, and rotates and signs the ssh host key on each inventory target.
+
+```
+ansible-playbook -u root -i hosts.ini lava-book.yml
+```
 
 ## warning 🐉 
 
