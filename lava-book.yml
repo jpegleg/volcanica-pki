@@ -23,7 +23,7 @@
       dest: /etc/ssh/ssh_host_ed25519_key_staging-cert.pub
 
   - name: move staging key and cert to active
-    shell: mv /etc/ssh/ssh_host_ed25519_key_staging /etc/ssh/ssh_host_ed25519_key && mv /etc/ssh/ssh_host_ed25519_key_staging-cert.pub /etc/ssh/ssh_host_ed25519_key-cert.pub && chmod 600 /etc/ssh/ssh_host_ed25519_key
+    shell: mv /etc/ssh/ssh_host_ed25519_key_staging /etc/ssh/ssh_host_ed25519_key && mv /etc/ssh/ssh_host_ed25519_key_staging.pub /etc/ssh/ssh_host_ed25519_key.pub && mv /etc/ssh/ssh_host_ed25519_key_staging-cert.pub /etc/ssh/ssh_host_ed25519_key-cert.pub && chmod 600 /etc/ssh/ssh_host_ed25519_key
   
   - name: enforce sshd_config
     copy:
@@ -36,6 +36,6 @@
       dest: /etc/ssh/ssh_user_key.pub
 
   - name: restart ssh
-    shell: systemctl restart ssh
+    shell: systemctl restart sshd
    
 ...
