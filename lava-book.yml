@@ -5,7 +5,7 @@
   tasks:
   
   - name: rotate ed25519 host key on each server to staging key
-    shell: /usr/local/bin/lava_new_client /etc/ssh/ssh_host_ed25519_key_staging
+    shell: /usr/local/bin/lava_new_volcano_client /etc/ssh/ssh_host_ed25519_key_staging
     
   - name: pull ed_25519 public host staging key
     fetch:
@@ -14,7 +14,8 @@
       flat: yes
   
   - name: sign staging key
-    local_action: /usr/local/bin/lava_volcanica_sign_host /opt/server_ssh/server_ca root ssh_host_ed25519_key_staging.pub
+    delegate_to: localhost
+    command: /usr/local/bin/lava_volcanica_sign_host dev1 {{ inventory_hostname }}  ssh_host_ed25519_key_staging.pub
   
   - name: deploy the staged certificate 
     copy:
@@ -22,11 +23,19 @@
       dest: /etc/ssh/ssh_host_ed25519_key_staging-cert.pub
 
   - name: move staging key and cert to active
-    shell: mv /etc/ssh/ssh_host_ed25519_key_staging /etc/ssh/ssh_host_ed25519_key && mv /etc/ssh/ssh_host_ed25519_key_staging-cert.pub /etc/ssh/ssh_host_ed25519_key-cert.pub
+    shell: mv /etc/ssh/ssh_host_ed25519_key_staging /etc/ssh/ssh_host_ed25519_key && mv /etc/ssh/ssh_host_ed25519_key_staging-cert.pub /etc/ssh/ssh_host_ed25519_key-cert.pub && chmod 600 /etc/ssh/ssh_host_ed25519_key
   
   - name: enforce sshd_config
     copy:
       src: templates/server__sshd_config
       dest: /etc/ssh/sshd_config
       
-  ...
+  - name: deploy the user CA public key 
+    copy:
+      src: ssh_user_key.pub
+      dest: /etc/ssh/ssh_user_key.pub
+
+  - name: restart ssh
+    shell: systemctl restart ssh
+   
+...
