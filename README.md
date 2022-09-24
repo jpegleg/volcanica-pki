@@ -112,6 +112,12 @@ For lava mode server renewals, there is an ansible playbook titled lava-book.yml
 ansible-playbook -u root -i hosts.ini lava-book.yml
 ```
 
+Coming next for more ansible books: software installer and compiler playbooks
+
+## utils
+
+There is a directory called utils in this project that has scrap glue programs for the PKI servers.  
+
 ## warning 🐉 
 
 If volcanica-pki is deployed, ssh keys will not work for access unless they have a valid certificate as per the sshd_config hardening.
