@@ -1,0 +1,32 @@
+---
+- name: rotate host keys
+  hosts: servers
+  serial: 1
+  tasks:
+  
+  - name: rotate ed25519 host key on each server to staging key
+    shell: /usr/local/bin/lava_new_client /etc/ssh/ssh_host_ed25519_key_staging
+    
+  - name: pull ed_25519 public host staging key
+    fetch:
+      src: /etc/ssh/ssh_host_ed25519_key_staging.pub
+      dest: ssh_host_ed25519_key_staging.pub
+      flat: yes
+  
+  - name: sign staging key
+    local_action: /usr/local/bin/lava_volcanica_sign_host /opt/server_ssh/server_ca root ssh_host_ed25519_key_staging.pub
+  
+  - name: deploy the staged certificate 
+    copy:
+      src: ssh_host_ed25519_key_staging-cert.pub
+      dest: /etc/ssh/ssh_host_ed25519_key_staging-cert.pub
+
+  - name: move staging key and cert to active
+    shell: mv /etc/ssh/ssh_host_ed25519_key_staging /etc/ssh/ssh_host_ed25519_key && mv /etc/ssh/ssh_host_ed25519_key_staging-cert.pub /etc/ssh/ssh_host_ed25519_key-cert.pub
+  
+  - name: enforce sshd_config
+    copy:
+      src: templates/server__sshd_config
+      dest: /etc/ssh/sshd_config
+      
+  ...
