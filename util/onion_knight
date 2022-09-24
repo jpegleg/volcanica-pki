@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+while true; do
+  timestamp=$(date +%Y%m%dT%H%M%S)
+  echo  "$timestamp - generate key -+- " &&  /usr/local/bin/lava_new_volcano_client "$2" && chmod 600 "$2"
+  timestamp=$(date +%Y%m%dT%H%M%S)
+  echo  "$timestamp - install to user home -=- " && cp "$2".* /home/"$4"/.ssh/ && cp "$2" /home/"$4"/.ssh/
+  timestamp=$(date +%Y%m%dT%H%M%S)
+  echo  "$timestamp - signing -=- "/usr/local/bin/lava_volcanica_sign_user "$1" "$3" /home/"$4"/.ssh/"$2".pub
+  /usr/local/bin/lava_volcanica_sign_user "$1" "$3" /home/"$4".ssh/"$2".pub
+  chown ADMINDISTRIBUTIONUSER:ADMINDISTRIBUTIONUSER /home/"$4"/.ssh/"$2" /home/"$4"/.ssh/"$2".*
+  timestamp=$(date +%Y%m%dT%H%M%S)
+  echo "$timestamp - sleep for under 3.17 hours, enough to get some cycles in, then we re key the local user $4" 
+  sleep 11411
+done
