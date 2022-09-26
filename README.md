@@ -1,6 +1,5 @@
 
-![net-gargoyle2](https://carefuldata.com/images/cdlogo.png)
-# volcanica-pki 🌋
+
 
 ![volcanica-pki](https://carefuldata.com/volcanica-pki_arch1.png)
 
