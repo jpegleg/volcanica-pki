@@ -1,7 +1,6 @@
-
-
-
 ![volcanica-pki](https://carefuldata.com/volcanica-pki_arch1.png)
+
+# configuration and automation tools for SSH
 
 Some ed25519 ssh key and certificate generation tools.
 
