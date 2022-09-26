@@ -33,13 +33,13 @@ bash install_volcanica
 On the signing server, generate a new user access CA:
 
 ```
-new_volcano_ca $(cat /etc/machine-id) mypgpgthing@mypgpgkey.thingsetc
+new_volcano_ca dev1 mypgpgthing@mypgpgkey.thingsetc
 ```
 
 Optionally generate a separate ssh server CA. Them being different has tactical beneifts.
 
 ```
-new_volcano_ca userseca root@lansegmentssomething.local
+new_volcano_ca devhosts root@lansegmentssomething.local
 ```
 
 The first argument can be anything desired for the key ID. In the example we use the `machine-id` value.
@@ -48,7 +48,7 @@ The second argument is the gpg key id or key email.
 Sign the host_key used by each server (send the public host key over to the PKI server):
 
 ```
-volcanica_sign_host $(cat /etc/machine-id) myservers1.net,myserver2.net,myserver3.net ssh_host_ed25519.pub
+volcanica_sign_host devhosts myservers1.net,myserver2.net,myserver3.net ssh_host_ed25519.pub
 ```
 
 Another example with a different naming scheme:
@@ -73,7 +73,7 @@ In `lava_` mode, the plaintext private key is written to disk during generation,
 The public key can be sent to the PKI server (TBD on transmission approach there) to then sign (will be prompted for gpg password to the private key unless using lava mode):
 
 ```
-volcanica_sign_user userseca myuser "$clientmachineid".pub
+volcanica_sign_user dev1 myuser "$clientmachineid".pub
 ```
 
 The input names are intentionally flexible in this system. Whatever is used as the first argument will be treated as "$1".asc,
