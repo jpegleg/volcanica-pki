@@ -42,7 +42,7 @@ Optionally generate a separate ssh server CA. Them being different has tactical 
 new_volcano_ca devhosts root@lansegmentssomething.local
 ```
 
-The first argument can be anything desired for the key ID. In the example we use the `machine-id` value.
+The first argument can be anything desired for the key ID, although it is best to have the name pattern understood and used consistently.
 The second argument is the gpg key id or key email.
 
 Sign the host_key used by each server (send the public host key over to the PKI server):
@@ -59,7 +59,7 @@ volcanica_sign_host prod_group100 myservers1.net,myserver2.net,myserver3.net ssh
 
 The host certificate is signed with ssh-keygen using the decrypted key file, but has to be configured to be used in the `/etc/ssh/sshd_config`.
 
-On a client side, generating a new key pair:
+On a client side, generating a new key pair, in this case using the value of /etc/machine-id as the base file name for the encrypted ed25519 key:
 
 ```
 new_volcano_client $(cat /etc/machine-id) someuserpgpkey@placeandstuff
