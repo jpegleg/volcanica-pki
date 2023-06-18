@@ -22,19 +22,20 @@ const MAGIC: &[u8] = b"openssh-key-v1\x00";
 const NONE: &[u8] = b"none";
 const BLOCKSIZE: usize = 8;
 
-fn get_sk(pk: &[u8], keypair: Keypair) -> String {
+
+fn get_sk(pk: &[u8], keypair: Keypair) -> String { 
   let mut buffer = ByteBuffer::new();
   buffer.write_bytes(MAGIC);
   buffer.write_u32(NONE.len() as u32);
   buffer.write_bytes(NONE);
   buffer.write_u32(NONE.len() as u32);
-  buffer.write_bytes(NONE);
-  buffer.write_u32(0);
+  buffer.write_bytes(NONE);  
+  buffer.write_u32(0); 
   buffer.write_u32(1);
   buffer.write_u32(pk.len() as u32);
-  buffer.write_bytes(pk);
+  buffer.write_bytes(pk);          
 
-  let mut sk = ByteBuffer::new();
+  let mut sk = ByteBuffer::new();?
   // your choice of hex here
   sk.write_u32(0x0ba4ef88);
   sk.write_u32(0x0ba4ef88);
@@ -48,9 +49,10 @@ fn get_sk(pk: &[u8], keypair: Keypair) -> String {
   }
 
   buffer.write_u32(sk.len() as u32);
-  buffer.write_bytes(&sk.to_bytes());
-  return encode(buffer.to_bytes());
+  buffer.write_bytes(&sk.into_bytes());
+  return encode(buffer.into_bytes());
 }
+
 
 fn main() -> Result<(), Box<dyn Error>> {
   let pattern = args().nth(1).unwrap_or_default();
@@ -66,7 +68,7 @@ fn main() -> Result<(), Box<dyn Error>> {
   loop {
     let keypair = Keypair::generate(&mut csprng);
     buffer.write_bytes(&keypair.public.to_bytes());
-    let pk = buffer.to_bytes();
+    let pk = buffer.into_bytes();
     let pk64 = encode(&pk);
     if regex.is_match(&pk64) {
       println!("ssh-ed25519 {}", pk64);
