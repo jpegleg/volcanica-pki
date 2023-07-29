@@ -35,7 +35,7 @@ fn get_sk(pk: &[u8], keypair: Keypair) -> String {
   buffer.write_u32(pk.len() as u32);
   buffer.write_bytes(pk);          
 
-  let mut sk = ByteBuffer::new();?
+  let mut sk = ByteBuffer::new();
   // your choice of hex here
   sk.write_u32(0x0ba4ef88);
   sk.write_u32(0x0ba4ef88);
